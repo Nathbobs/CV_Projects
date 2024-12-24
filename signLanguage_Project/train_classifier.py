@@ -32,6 +32,7 @@ import pickle
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
+import os
 
 
 # Load data
@@ -57,3 +58,12 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 print("Accuracy:", accuracy)
+
+
+save_dir = os.path.join(os.path.dirname(__file__), 'saved_models')  # Create a folder named 'saved_models'
+os.makedirs(save_dir, exist_ok=True)  # Ensure the directory exists
+
+model_path = os.path.join(save_dir, 'random_forest_model.pkl')  # File path for the model
+
+with open(model_path, 'wb') as f:
+    pickle.dump(model, f)
