@@ -1,40 +1,50 @@
-# Sign Language Project
+# Sign Language Detection  
 
-This project aims to develop a system for recognizing and translating sign language using machine learning techniques.
+## Table of Contents  
+- [About](#about)  
+- [Technologies](#technologies)  
+- [Prerequisites](#prerequisites)  
+- [Features](#features)  
+- [Demo](#demo)  
+- [Issues and Next Steps](#issues-and-next-steps)  
 
-## Table of Contents
-- [Introduction](#introduction)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+---
 
-## Introduction
-The Sign Language Project is designed to help bridge the communication gap between sign language users and non-sign language users by providing a tool that can translate sign language gestures into text or speech.
+## About  
+This project aims to detect and classify **sign language gestures** using **machine learning** and **computer vision**.  
 
-## Installation
-To install the necessary dependencies, run the following command:
-```bash
-pip install -r requirements.txt
-```
+---
 
-## Usage
-To use the system, follow these steps:
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/yourusername/signLanguage_Project.git
-    ```
-2. Navigate to the project directory:
-    ```bash
-    cd signLanguage_Project
-    ```
-3. Run the main application:
-    ```bash
-    python main.py
-    ```
+## Technologies  
+- **Python 3.8+**  
+- **OpenCV**  
+- **MediaPipe**  
+- **Scikit-Learn**  
 
-## Contributing
-We welcome contributions to the Sign Language Project! Please read our [contributing guidelines](CONTRIBUTING.md) for more information.
+---
+## Features
 
-## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+✨ Hand Landmark Detection using MediaPipe.
+✨ Multi-Class Classification with Random Forest Classifier.
+✨ Custom Dataset Collection for training gestures.
+
+---
+## Demo
+### Landmark Detection Example
+<p align="center">
+  <img src="./readme_media/landmark1.jpg" width="300"/>
+  <img src="./readme_media/landmark2.jpg" width="300"/>
+  <img src="./readme_media/landmark3.jpg" width="300"/>
+</p>
+
+### Model Prediction Example
+
+<p align="center">
+  <img src="./readme_media/failure_example.gif" width="500"/>
+</p>
+
+---
+## Issues 🚧
+
+### Current Issue:
+	•	The model often predicts **'your'** for most gestures, failing to differentiate between inputs.
