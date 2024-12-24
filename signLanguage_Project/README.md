@@ -24,9 +24,9 @@ This project aims to detect and classify **sign language gestures** using **mach
 ---
 ## Features
 
-✨ Hand Landmark Detection using MediaPipe.
-✨ Multi-Class Classification with Random Forest Classifier.
-✨ Custom Dataset Collection for training gestures.
+- ✨ Hand Landmark Detection using MediaPipe.
+- ✨ Multi-Class Classification with Random Forest Classifier.
+- ✨ Custom Dataset Collection for training gestures.
 
 ---
 ## Demo
@@ -47,4 +47,4 @@ This project aims to detect and classify **sign language gestures** using **mach
 ## Issues 🚧
 
 ### Current Issue:
-	•	The model often predicts **'your'** for most gestures, failing to differentiate between inputs.
+The model often predicts **'your'** for most gestures, failing to differentiate between inputs.
