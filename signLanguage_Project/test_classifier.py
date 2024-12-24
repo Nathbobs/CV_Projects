@@ -96,7 +96,7 @@ with open(model_path, 'rb') as f:
     model = pickle.load(f)
 
 # Initialize webcam
-cap = cv2.VideoCapture(1)  # Use external camera (index 1)
+cap = cv2.VideoCapture(1) 
 
 # Initialize MediaPipe Hands
 mp_hands = mp.solutions.hands

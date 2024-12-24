@@ -32,9 +32,9 @@ This project aims to detect and classify **sign language gestures** using **mach
 ## Demo
 ### Landmark Detection Example
 <p align="center">
-  <img src="./readme_media/landmark1.jpg" width="300"/>
-  <img src="./readme_media/landmark2.jpg" width="300"/>
-  <img src="./readme_media/landmark3.jpg" width="300"/>
+  <img src="./readme_media/landmark1.png" width="300"/>
+  <img src="./readme_media/landmark2.png" width="300"/>
+  <img src="./readme_media/landmark3.png" width="300"/>
 </p>
 
 ### Model Prediction Example
