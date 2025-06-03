@@ -2,40 +2,23 @@ import cv2
 import torch
 import matplotlib.pyplot as plt
 
-from enum import Enum 
-import os
+#donwloading the MiDAS model
+midas = torch.hub.load("intel-isl/MiDaS", "MiDaS_small")
+midas.to('cpu')
+midas.eval()
 
-import numpy as np
+#input transform
+transforms = torch.hub.load("intel-isl/MiDaS", "transforms")
+transform = transforms.small_transform
 
-class ModelType(Enum):
-    DPT_LARGE = "DPT_Large"     # MiDaS v3 - Large     (highest accuracy, slowest inference speed)
-    DPT_Hybrid = "DPT_Hybrid"   # MiDaS v3 - Hybrid    (medium accuracy, medium inference speed)
-    DPT_SMALL = "MiDaS_small"  # MiDaS v2.1 - Small   (lowest accuracy, highest inference speed)
+#to openCV
+cap = cv2.VideoCapture(0)
+while cap.isOpened():
+    ret, frame = cap.read()
 
-class Midas():
-    def __init__(self, modelType:ModelType=ModelType.DPT_LARGE):
-        self.midas = torch.hub.load("isl-org/MiDaS", modelType.value)
-        self.model_type = modelType
+    cv2.imshow("Input", frame)
 
-    def useCUDA(self):
-        if torch.cuda.is_available():
-            print("Using CUDA for inference.")  
-            self.device = torch.device("cuda")
-        else:
-            print("CUDA not available, using CPU.")
-            self.device = torch.device("cpu")
-        self.midas.to(self.device)
-        self.midas.eval()
-
-    def transform(self):
-        print('Transform')
-        midas_transforms = torch.hub.load("isl-org/MiDaS", "transforms")
-        if self.model_type == ModelType.DPT_LARGE:
-            self.transform = midas_transforms.dpt_transform
-        elif self.model_type == ModelType.DPT_Hybrid:
-            self.transform = midas_transforms.dpt_hybrid_transform
-        elif self.model_type == ModelType.DPT_SMALL:
-            self.transform = midas_transforms.small_transform
-        else:
-            raise ValueError("Invalid model type specified.")
+    if cv2.waitKey(10) & 0xFF == ord('q'):
+        cap.release()
+        cv2.destroyAllWindows()
         
