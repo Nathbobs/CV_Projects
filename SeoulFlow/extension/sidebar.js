@@ -17,6 +17,8 @@ async function startMonitoring() {
   }
   pollInterval = setInterval(fetchStatus, 1000);
   setControls(true);
+  // Wait for the pipeline to produce its first frames before opening the stream
+  setTimeout(() => chrome.tabs.create({ url: `${API_BASE}/preview` }), 1500);
 }
 
 async function stopMonitoring() {
@@ -69,3 +71,6 @@ function setConnectionError() {
 
 document.getElementById("btn-start").addEventListener("click", startMonitoring);
 document.getElementById("btn-stop").addEventListener("click", stopMonitoring);
+document.getElementById("btn-preview").addEventListener("click", () => {
+  chrome.tabs.create({ url: "http://localhost:8000/preview" });
+});

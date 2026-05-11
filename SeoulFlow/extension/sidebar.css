@@ -69,8 +69,16 @@ button:disabled {
   cursor: not-allowed;
 }
 
-#btn-start { background: #22c55e; color: #052e16; }
-#btn-stop  { background: #ef4444; color: #fff; }
+#btn-start   { background: #22c55e; color: #052e16; }
+#btn-stop    { background: #ef4444; color: #fff; }
+#btn-preview {
+  width: 100%;
+  background: #1e2535;
+  color: #94a3b8;
+  border: 1px solid #334155;
+  margin-top: 2px;
+}
+#btn-preview:hover { background: #263147; color: #e2e8f0; }
 
 .status-section {
   display: flex;
