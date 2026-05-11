@@ -11,18 +11,18 @@ from .tracker import Tracker
 from .scorer import compute_score
 
 VEHICLE_CLASSES = [2, 3, 5, 7]  # car, motorcycle, bus, truck (COCO indices)
-CONF_THRESHOLD = 0.4
+CONF_THRESHOLD = 0.25
 
 # Resolved relative to this file so the path is correct regardless of cwd
 _MODELS_DIR = Path(__file__).parent / "models"
-MODEL_PATH = _MODELS_DIR / "yolov8n.pt"
+MODEL_PATH = _MODELS_DIR / "yolov8x.pt"
 
 
 def _load_model(model_path: Path) -> YOLO:
     # ultralytics downloads "yolov8n.pt" by name, then we move it into place
     if not model_path.exists():
         model_path.parent.mkdir(parents=True, exist_ok=True)
-        tmp = YOLO("yolov8n.pt")          # downloads to cwd / ultralytics cache
+        tmp = YOLO("yolov8x.pt")          # downloads to cwd / ultralytics cache
         src = Path(tmp.ckpt_path).resolve()
         if src != model_path.resolve():
             src.rename(model_path)
@@ -56,8 +56,6 @@ async def run_pipeline(video_path: str, model_path: Path = MODEL_PATH) -> None:
         raise RuntimeError(f"Cannot open video: {video_path}")
 
     tracker = Tracker()
-    frame_idx = 0
-    last_detections: list[list[float]] = []
     fps_counter = 0
     fps_ts = time.monotonic()
 
@@ -73,23 +71,20 @@ async def run_pipeline(video_path: str, model_path: Path = MODEL_PATH) -> None:
                 if not ok:
                     break
 
-            frame_idx += 1
             fps_counter += 1
 
-            # Inference every other frame — halves GPU load without much accuracy loss
-            if frame_idx % 2 == 0:
-                results = await asyncio.to_thread(
-                    model, frame,
-                    conf=CONF_THRESHOLD,
-                    classes=VEHICLE_CLASSES,
-                    verbose=False,
-                )
-                boxes = results[0].boxes
-                last_detections = [
-                    b.xyxy[0].tolist()
-                    for b in boxes
-                    if int(b.cls[0]) in set(VEHICLE_CLASSES)
-                ] if boxes is not None else []
+            results = await asyncio.to_thread(
+                model, frame,
+                conf=CONF_THRESHOLD,
+                classes=VEHICLE_CLASSES,
+                verbose=False,
+            )
+            boxes = results[0].boxes
+            last_detections = [
+                b.xyxy[0].tolist()
+                for b in boxes
+                if int(b.cls[0]) in set(VEHICLE_CLASSES)
+            ] if boxes is not None else []
 
             active = tracker.update(last_detections)
 

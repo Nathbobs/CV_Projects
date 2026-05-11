@@ -4,11 +4,11 @@ def compute_score(total: int, stationary: int) -> tuple[float, str]:
 
     ratio = stationary / total
 
-    if ratio <= 0.25:
+    if ratio <= 0.30:
         status = "FREE"
     elif ratio <= 0.50:
         status = "LIGHT"
-    elif ratio <= 0.75:
+    elif ratio <= 0.90:
         status = "HEAVY"
     else:
         status = "GRIDLOCK"

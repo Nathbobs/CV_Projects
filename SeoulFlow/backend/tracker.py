@@ -50,12 +50,12 @@ class Track:
         self.no_match_count = 0
 
         vx, vy = self.kf.x[2, 0], self.kf.x[3, 0]
-        if np.sqrt(vx ** 2 + vy ** 2) < 15.0:
+        if np.sqrt(vx ** 2 + vy ** 2) < 35.0:
             self._stationary_streak += 1
         else:
             self._stationary_streak = 0
 
-        self.stationary = self._stationary_streak >= 5
+        self.stationary = self._stationary_streak >= 8
 
     @property
     def position(self) -> tuple[float, float]:
