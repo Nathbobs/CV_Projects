@@ -55,7 +55,7 @@ class Track:
         else:
             self._stationary_streak = 0
 
-        self.stationary = self._stationary_streak >= 8
+        self.stationary = self._stationary_streak >= 12
 
     @property
     def position(self) -> tuple[float, float]:
