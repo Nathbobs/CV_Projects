@@ -1,4 +1,4 @@
-#my mp4 files
-.mp4
-yolov8n.pt
-yolov8x.pt
+# Large model and video files
+*.mp4
+*.webm
+*.pt
